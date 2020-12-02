@@ -1,0 +1,11 @@
+[package]
+name = "day-2"
+version = "0.1.0"
+authors = ["Jacob Odgård Tørring <jacob.torring@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+clap = "3.0.0-beta.1"
+rayon = "0.9.0"
+parse-display = "0.4.0"
+
