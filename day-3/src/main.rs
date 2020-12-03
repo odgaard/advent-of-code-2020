@@ -1,22 +1,26 @@
-use std::fs::read_to_string;
-use std::env::args;
-use std::time::Instant;
 use std::fs;
 
 
 // Modified version of LeTonVonLaser's solution and Didibear's solution
 
 fn main() {
-    let filename = "input.txt";
-    let contents = fs::read_to_string(filename)
+    let input = fs::read_to_string("input.txt")
         .expect("Something went wrong reading the file");
-    let res1 = path(&contents, 3, 1);
-    let res2 = path(&contents, 1, 1);
-    let res3 = path(&contents, 5, 1);
-    let res4 = path(&contents, 7, 1);
-    let res5 = path(&contents, 1, 2);
-    println!("First: {}", res2);
-    println!("Second: {}", res1*res2*res3*res4*res5);
+
+    let slopes = [(3, 1)];
+    let slopes2 = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)];
+    let result: usize = solve(&slopes, &input);
+    let result2: usize = solve(&slopes2, &input);
+
+    println!("{}", result);
+    println!("{}", result2);
+}
+
+fn solve(slopes: &[(usize, usize)], input: &str) -> usize {
+    slopes
+        .iter()
+        .map(|(right, down)| path(&input, *right, *down))
+        .product()
 }
 
 fn path(contents: &str, right: usize, down: usize) -> usize {
